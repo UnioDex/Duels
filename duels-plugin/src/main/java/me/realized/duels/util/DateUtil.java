@@ -39,31 +39,31 @@ public final class DateUtil {
         StringBuilder sb = new StringBuilder();
 
         if (years > 0) {
-            sb.append(years).append("yr");
+            sb.append(years).append("yıl");
         }
 
         if (months > 0) {
-            sb.append(months).append("mo");
+            sb.append(months).append("ay");
         }
 
         if (weeks > 0) {
-            sb.append(weeks).append("w");
+            sb.append(weeks).append("h");
         }
 
         if (days > 0) {
-            sb.append(days).append("d");
+            sb.append(days).append("g");
         }
 
         if (hours > 0) {
-            sb.append(hours).append("h");
+            sb.append(hours).append("s");
         }
 
         if (minutes > 0) {
-            sb.append(minutes).append("m");
+            sb.append(minutes).append("d");
         }
 
         if (seconds > 0) {
-            sb.append(seconds).append("s");
+            sb.append(seconds).append("sa");
         }
 
         return sb.toString();
@@ -91,7 +91,7 @@ public final class DateUtil {
         StringBuilder builder = new StringBuilder();
 
         if (years > 0) {
-            builder.append(years).append(years > 1 ? " years" : " year");
+            builder.append(years).append(years > 1 ? " yıl" : " yıl");
         }
 
         if (months > 0) {
@@ -99,7 +99,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(months).append(months > 1 ? " months" : " month");
+            builder.append(months).append(months > 1 ? " ay" : " ay");
         }
 
         if (weeks > 0) {
@@ -107,7 +107,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(weeks).append(weeks > 1 ? " weeks" : " week");
+            builder.append(weeks).append(weeks > 1 ? " hafta" : " hafta");
         }
 
         if (days > 0) {
@@ -115,7 +115,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(days).append(days > 1 ? " days" : " day");
+            builder.append(days).append(days > 1 ? " gün" : " gün");
         }
 
         if (hours > 0) {
@@ -123,7 +123,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(hours).append(hours > 1 ? " hours" : " hour");
+            builder.append(hours).append(hours > 1 ? " saat" : " saat");
         }
 
         if (minutes > 0) {
@@ -131,7 +131,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(minutes).append(minutes > 1 ? " minutes" : " minute");
+            builder.append(minutes).append(minutes > 1 ? " dakika" : " dakika");
         }
 
         if (seconds > 0) {
@@ -139,7 +139,7 @@ public final class DateUtil {
                 builder.append(" ");
             }
 
-            builder.append(seconds).append(seconds > 1 ? " seconds" : " second");
+            builder.append(seconds).append(seconds > 1 ? " saniye" : " saniye");
         }
 
         return builder.toString();
