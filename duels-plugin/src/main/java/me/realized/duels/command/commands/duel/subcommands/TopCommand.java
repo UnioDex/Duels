@@ -8,18 +8,24 @@ import me.realized.duels.command.BaseCommand;
 import me.realized.duels.extra.Permissions;
 import me.realized.duels.kit.Kit;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class TopCommand extends BaseCommand {
 
     public TopCommand(final DuelsPlugin plugin) {
-        super(plugin, "top", "top [wins|losses|kit]", "Displays top wins, losses, or rating for kit.", Permissions.TOP, 2, true);
+        super(plugin, "top", null, null, Permissions.TOP, 1, true);
     }
 
     @Override
     protected void execute(final CommandSender sender, final String label, final String[] args) {
         if (!userManager.isLoaded()) {
             lang.sendMessage(sender, "ERROR.data.not-loaded");
+            return;
+        }
+
+        if (args.length < 2) {
+            lang.sendMessage(sender, "COMMAND.duel.top-usage");
             return;
         }
 

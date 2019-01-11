@@ -88,6 +88,7 @@ COMMAND:
     - '&f/%command% toggle &e- &7Enable or disable receiving duel requests.'
     - '&f/%command% top [wins|losses|kit] &e- &7Displays top wins, losses, or rating for the kit.'
     - '{LINE}'
+    top-usage: '&f/duel top [wins|losses|kit] &e- &7Displays top wins, losses, or rating for the kit.'
     request:
       send:
         sender:
