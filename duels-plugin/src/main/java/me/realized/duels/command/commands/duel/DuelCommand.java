@@ -223,7 +223,11 @@ public class DuelCommand extends BaseCommand {
         if (sendRequest) {
             requestManager.send(player, target, settings);
         } else if (config.isUseOwnInventoryEnabled()) {
-            settings.openGui(player);
+            if (config.isRequestInventoryEnabled()) {
+                settings.openGui(player);
+            }else {
+                requestManager.send(player, target, settings);
+            }
         } else {
             kitManager.getGui().open(player);
         }

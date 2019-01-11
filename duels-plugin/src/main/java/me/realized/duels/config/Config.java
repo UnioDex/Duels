@@ -214,6 +214,9 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     @Getter
     private double heartsToRegen;
 
+    @Getter
+    private boolean requestInventoryEnabled;
+
     private final Map<String, MessageSound> sounds = new HashMap<>();
 
     public Config(final DuelsPlugin plugin) {
@@ -326,6 +329,7 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         queuesFillerType = configuration.getString("guis.queues.space-filler-item.type", "STAINED_GLASS_PANE");
         queuesFillerData = (short) configuration.getInt("guis.queues.space-filler-item.data", 0);
         inheritKitItemType = configuration.getBoolean("guis.queues.inherit-kit-item-type", true);
+        requestInventoryEnabled = configuration.getBoolean("guis.settings.enabled", true);
 
         soupEnabled = configuration.getBoolean("soup.enabled", true);
         nameStartingWith = configuration.getString("soup.arena-name-starting-with", "soup arena");

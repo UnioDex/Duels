@@ -470,6 +470,7 @@ guis:
       data: 0
   settings:
     # Item used to fill empty spaces in the settings GUI.
+    enabled: true
     space-filler-item:
       type: STAINED_GLASS_PANE
       data: 0
