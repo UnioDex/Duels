@@ -5,6 +5,11 @@ clean.doFirst {
     delete "$rootDir/out/"
 }
 
+apply plugin: 'java'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 tasks.withType(ShadowJar) {
     destinationDir = file("$rootDir/out/")
 }
