@@ -24,9 +24,7 @@ public class SettingsGui extends SinglePageGui<DuelsPlugin> {
         Slots.run(20, 25, slot -> inventory.setItem(slot, spacing));
 
         set(4, new RequestDetailsButton(plugin));
-        set(12, new KitSelectButton(plugin));
-        set(13, new ArenaSelectButton(plugin));
-        set(14, new ItemBettingButton(plugin));
+        set(13, new KitSelectButton(plugin));
         set(0, 2, 3, new RequestSendButton(plugin));
         set(7, 9, 3, new CancelButton(plugin));
     }
