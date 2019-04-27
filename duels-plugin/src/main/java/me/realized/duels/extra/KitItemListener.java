@@ -13,6 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -93,6 +94,25 @@ public class KitItemListener implements Listener {
         item.remove();
         player.sendMessage(WARNING);
         Log.warn(String.format(WARNING_CONSOLE, player.getName()));
+    }
+
+    @EventHandler
+    public void on(final PlayerJoinEvent event) {
+        final Player player = event.getPlayer();
+
+        if (!shouldCancel(player)) {
+            return;
+        }
+
+        for (ItemStack item : player.getInventory().getContents()) {
+            if (!isKitItem(item)) {
+                return;
+            }
+
+            player.getInventory().remove(item);
+            player.sendMessage(WARNING);
+            Log.warn(String.format(WARNING_CONSOLE, player.getName()));
+        }
     }
 
     private boolean shouldCancel(final Player player) {
