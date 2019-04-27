@@ -27,6 +27,9 @@ public class ObsidianAuctionsHook extends PluginHook<DuelsPlugin> {
                 if (auction.getOwner().equalsIgnoreCase(player.getName())) {
                     return true; // ON AUCTION
                 }
+                if (auction.getCurrentBid().getBidder().equalsIgnoreCase(player.getName())) {
+                    return true; // BIDDED ON AN AUCTION
+                }
 
                 for(int i = 0; i < userScope.getAuctionQueueLength(); i++)
                 {
