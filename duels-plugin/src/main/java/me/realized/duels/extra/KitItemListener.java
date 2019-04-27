@@ -100,10 +100,6 @@ public class KitItemListener implements Listener {
     public void on(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
 
-        if (!shouldCancel(player)) {
-            return;
-        }
-
         for (ItemStack item : player.getInventory().getContents()) {
             if (!isKitItem(item)) {
                 return;
