@@ -27,17 +27,16 @@ public class ObsidianAuctionsHook extends PluginHook<DuelsPlugin> {
                 if (auction.getOwner().equalsIgnoreCase(player.getName())) {
                     return true; // ON AUCTION
                 }
-                if (auction.getCurrentBid().getBidder().equalsIgnoreCase(player.getName())) {
-                    return true; // BIDDED ON AN AUCTION
+                if (auction.getCurrentBid() != null) {
+                    if (auction.getCurrentBid().getBidder().equalsIgnoreCase(player.getName())) {
+                        return true; // BIDDED ON AN AUCTION
+                    }
                 }
 
-                for(int i = 0; i < userScope.getAuctionQueueLength(); i++)
-                {
-                    if (userScope.getAuctionQueue().get(i) != null)
-                    {
+                for (int i = 0; i < userScope.getAuctionQueueLength(); i++) {
+                    if (userScope.getAuctionQueue().get(i) != null) {
                         Auction queuedAuction = userScope.getAuctionQueue().get(i);
-                        if (queuedAuction.getOwner().equalsIgnoreCase(player.getName()))
-                        {
+                        if (queuedAuction.getOwner().equalsIgnoreCase(player.getName())) {
                             return true; // ON QUEUE
                         }
                     }
