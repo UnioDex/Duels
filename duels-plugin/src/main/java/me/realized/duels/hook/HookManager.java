@@ -1,20 +1,7 @@
 package me.realized.duels.hook;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.hook.hooks.BountyHuntersHook;
-import me.realized.duels.hook.hooks.CombatLogXHook;
-import me.realized.duels.hook.hooks.CombatTagPlusHook;
-import me.realized.duels.hook.hooks.EssentialsHook;
-import me.realized.duels.hook.hooks.FactionsHook;
-import me.realized.duels.hook.hooks.LeaderHeadsHook;
-import me.realized.duels.hook.hooks.MVdWPlaceholderHook;
-import me.realized.duels.hook.hooks.McMMOHook;
-import me.realized.duels.hook.hooks.MyPetHook;
-import me.realized.duels.hook.hooks.PlaceholderHook;
-import me.realized.duels.hook.hooks.PvPManagerHook;
-import me.realized.duels.hook.hooks.SimpleClansHook;
-import me.realized.duels.hook.hooks.VaultHook;
-import me.realized.duels.hook.hooks.WorldGuardHook;
+import me.realized.duels.hook.hooks.*;
 import me.realized.duels.util.hook.AbstractHookManager;
 
 public class HookManager extends AbstractHookManager<DuelsPlugin> {
@@ -30,6 +17,7 @@ public class HookManager extends AbstractHookManager<DuelsPlugin> {
         register("mcMMO", McMMOHook.class);
         register("MVdWPlaceholderAPI", MVdWPlaceholderHook.class);
         register("MyPet", MyPetHook.class);
+        register("ObsidianAuctions", ObsidianAuctionsHook.class);
         register("PlaceholderAPI", PlaceholderHook.class);
         register("PvPManager", PvPManagerHook.class);
         register("SimpleClans", SimpleClansHook.class);

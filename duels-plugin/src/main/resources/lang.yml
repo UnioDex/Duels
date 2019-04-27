@@ -273,6 +273,7 @@ DUEL:
     no-arena-available: '{FAIL_PREFIX} No arena is currently available. Please try again later.'
     arena-in-use: '{FAIL_PREFIX} That arena is already in use. Please select a different arena.'
     not-enough-money: '{FAIL_PREFIX} You or your opponent does not have $%bet_amount%.'
+    on-auction: '{FAIL_PREFIX} You or your opponent is on auction or auction queue.'
   prevent:
     item-drop: '&cYou cannot drop items while in a duel.'
     command: '&cYou cannot use ''%command%'' while in a duel.'

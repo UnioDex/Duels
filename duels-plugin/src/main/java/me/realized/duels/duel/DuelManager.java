@@ -1,14 +1,5 @@
 package me.realized.duels.duel;
 
-import java.util.Arrays;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.match.MatchEndEvent.Reason;
@@ -22,35 +13,19 @@ import me.realized.duels.data.MatchData;
 import me.realized.duels.data.UserData;
 import me.realized.duels.data.UserManager;
 import me.realized.duels.extra.Teleport;
-import me.realized.duels.hook.hooks.CombatLogXHook;
-import me.realized.duels.hook.hooks.CombatTagPlusHook;
-import me.realized.duels.hook.hooks.EssentialsHook;
-import me.realized.duels.hook.hooks.McMMOHook;
-import me.realized.duels.hook.hooks.MyPetHook;
-import me.realized.duels.hook.hooks.PvPManagerHook;
-import me.realized.duels.hook.hooks.SimpleClansHook;
-import me.realized.duels.hook.hooks.VaultHook;
-import me.realized.duels.hook.hooks.WorldGuardHook;
+import me.realized.duels.hook.hooks.*;
 import me.realized.duels.inventories.InventoryManager;
 import me.realized.duels.kit.Kit;
 import me.realized.duels.player.PlayerInfo;
 import me.realized.duels.player.PlayerInfoManager;
 import me.realized.duels.queue.QueueManager;
 import me.realized.duels.setting.Settings;
-import me.realized.duels.util.Loadable;
-import me.realized.duels.util.PlayerUtil;
-import me.realized.duels.util.RatingUtil;
-import me.realized.duels.util.StringUtil;
-import me.realized.duels.util.TextBuilder;
+import me.realized.duels.util.*;
 import me.realized.duels.util.compat.Players;
 import me.realized.duels.util.compat.Titles;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import org.apache.commons.lang.ArrayUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -61,15 +36,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+
+import java.util.*;
 
 public class DuelManager implements Loadable {
 
@@ -84,6 +56,7 @@ public class DuelManager implements Loadable {
     private QueueManager queueManager;
     private Teleport teleport;
     private CombatTagPlusHook combatTagPlus;
+    private ObsidianAuctionsHook obsidianAuctions;
     private PvPManagerHook pvpManager;
     private CombatLogXHook combatLogX;
     private VaultHook vault;
@@ -110,6 +83,7 @@ public class DuelManager implements Loadable {
         this.queueManager = plugin.getQueueManager();
         this.teleport = plugin.getTeleport();
         this.combatTagPlus = plugin.getHookManager().getHook(CombatTagPlusHook.class);
+        this.obsidianAuctions = plugin.getHookManager().getHook(ObsidianAuctionsHook.class);
         this.pvpManager = plugin.getHookManager().getHook(PvPManagerHook.class);
         this.combatLogX = plugin.getHookManager().getHook(CombatLogXHook.class);
         this.vault = plugin.getHookManager().getHook(VaultHook.class);
@@ -315,6 +289,12 @@ public class DuelManager implements Loadable {
             return;
         }
 
+        if (isOnAuction(first) || isOnAuction(second)) {
+            lang.sendMessage(Arrays.asList(first, second), "DUEL.start-failure.on-auction");
+            refundItems(items, first, second);
+            return;
+        }
+
         if (isTagged(first) || isTagged(second)) {
             lang.sendMessage(Arrays.asList(first, second), "DUEL.start-failure.is-tagged");
             refundItems(items, first, second);
@@ -389,6 +369,10 @@ public class DuelManager implements Loadable {
         return (combatTagPlus != null && combatTagPlus.isTagged(player))
             || (pvpManager != null && pvpManager.isTagged(player))
             || (combatLogX != null && combatLogX.isTagged(player));
+    }
+
+    private boolean isOnAuction(final Player player) {
+        return (obsidianAuctions != null && obsidianAuctions.isOnAuction(player));
     }
 
     private boolean notInLoc(final Player player, final Location location) {
