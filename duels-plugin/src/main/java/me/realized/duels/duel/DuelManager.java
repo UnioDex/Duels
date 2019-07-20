@@ -372,7 +372,7 @@ public class DuelManager implements Loadable {
     }
 
     private boolean isOnAuction(final Player player) {
-        return (obsidianAuctions != null && obsidianAuctions.isOnAuction(player));
+        return (obsidianAuctions != null && obsidianAuctions.canJoinDuel(player));
     }
 
     private boolean notInLoc(final Player player, final Location location) {

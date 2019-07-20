@@ -20,7 +20,7 @@ public class CombatTagListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onCombatLog(CombatLogEvent event) {
+    public void on(final CombatLogEvent event) {
         final Player player = event.getPlayer();
 
         if (arenaManager.isInMatch(player) || spectateManager.isSpectating(player)) {
